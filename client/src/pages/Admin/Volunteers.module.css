@@ -1,0 +1,290 @@
+.pageContainer {
+  position: relative;
+}
+
+.tabsContainer {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #ddd;
+  overflow-x: auto;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 12px 4px;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab.active {
+  color: var(--dark);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 3px 3px 0 0;
+}
+
+.tabBadge {
+  background: #eee;
+  color: var(--muted);
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-size: 12px;
+}
+
+.tab.active .tabBadge {
+  background: var(--primary);
+  color: white;
+}
+
+.tab.pending {
+  color: #b77904;
+}
+.tab.pending.active::after {
+  background: #b77904;
+}
+.tab.pending .tabBadge {
+  background: #ffe066;
+  color: #b77904;
+}
+
+.photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.initials {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.actionBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.viewBtn { color: #0056b3; }
+.viewBtn:hover { background: rgba(0,86,179,0.1); }
+.approveBtn { color: var(--success, #28a745); }
+.approveBtn:hover { background: rgba(40,167,69,0.1); }
+.rejectBtn { color: var(--error); }
+.rejectBtn:hover { background: rgba(220,53,69,0.1); }
+
+/* Slide-over Panel */
+.panelOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 420px;
+  background: white;
+  z-index: 1001;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.panelHeader {
+  padding: 24px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.headerProfile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.panelPhoto {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.panelName {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--dark);
+  margin: 0 0 4px 0;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 4px;
+}
+.closeBtn:hover { color: var(--dark); }
+
+.panelBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.infoSection {
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 12px 0;
+}
+
+.infoRow {
+  display: flex;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.infoLabel {
+  width: 100px;
+  color: var(--muted);
+}
+
+.infoValue {
+  flex: 1;
+  color: var(--dark);
+  font-weight: 500;
+}
+
+.pillGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  background: #f1f3f5;
+  color: var(--dark);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.motivationBox {
+  background: #f8f9fa;
+  border-left: 3px solid var(--primary);
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--dark);
+  font-style: italic;
+}
+
+.notesArea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  resize: vertical;
+}
+
+.notesArea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.panelFooter {
+  padding: 24px;
+  border-top: 1px solid #eee;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btnFull {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btnApprove {
+  background: var(--success, #28a745);
+  color: white;
+}
+.btnApprove:hover { background: #218838; }
+
+.btnReject {
+  background: transparent;
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+.btnReject:hover { background: rgba(220,53,69,0.05); }
+
+.selectProgram {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .panel { width: 100%; }
+}

@@ -1,0 +1,234 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  color: var(--dark);
+  margin: 0;
+}
+
+.countBadge {
+  background: rgba(27,67,50,0.1);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.createBtn {
+  background: var(--secondary);
+  color: var(--dark);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.createBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(180,80,20,0.2);
+}
+
+.actionBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.viewBtn { color: #0056b3; }
+.viewBtn:hover { background: rgba(0,86,179,0.1); }
+
+.editBtn { color: var(--primary); }
+.editBtn:hover { background: rgba(27,67,50,0.1); }
+
+.deleteBtn { color: var(--error); }
+.deleteBtn:hover { background: rgba(220,53,69,0.1); }
+
+.thumbnail {
+  width: 60px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.formSection {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  color: var(--dark);
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.formGroup {
+  margin-bottom: 16px;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.input, .select, .textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  transition: border-color 0.2s;
+  background: white;
+}
+
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.errorText {
+  color: var(--error);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.formActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.saveBtn {
+  flex: 1;
+  padding: 14px;
+  background: var(--secondary);
+  color: var(--dark);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.saveBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cancelBtn {
+  flex: 1;
+  padding: 14px;
+  background: transparent;
+  color: var(--dark);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* Toggle Switch */
+.switchWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px; width: 18px;
+  left: 3px; bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider { background-color: #0ca678; }
+input:checked + .slider:before { transform: translateX(20px); }
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .formGroup {
+    grid-column: 1 / -1;
+  }
+  .formActions {
+    flex-direction: column-reverse;
+  }
+}

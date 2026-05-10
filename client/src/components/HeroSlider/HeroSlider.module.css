@@ -1,0 +1,114 @@
+.sliderContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Navbar offset for mobile/desktop */
+  padding-top: 80px; 
+}
+
+.slideWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.slideImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  will-change: transform, opacity;
+}
+
+/* Ken Burns effect on the image itself */
+.kenBurns {
+  animation: kenBurns 5s ease-out forwards;
+}
+
+@keyframes kenBurns {
+  0% { transform: scale(1.0); }
+  100% { transform: scale(1.06); }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.grainOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 32px;
+  right: 40px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.scrollText {
+  writing-mode: vertical-rl;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollCircle {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: -2px;
+}
+
+@media (max-width: 768px) {
+  .sliderContainer {
+    padding-top: 0;
+  }
+  .scrollIndicator {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kenBurns {
+    animation: none;
+  }
+}

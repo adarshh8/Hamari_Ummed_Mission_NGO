@@ -1,0 +1,64 @@
+.dotsWrapper {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.dotActive {
+  width: 28px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--secondary);
+}
+
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  z-index: 5;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--secondary);
+  width: 0%;
+  animation: fillProgress 5s linear forwards;
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
+@keyframes fillProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@media (max-width: 768px) {
+  .dot {
+    width: 6px;
+    height: 6px;
+  }
+  .dotActive {
+    height: 6px;
+  }
+}

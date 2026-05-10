@@ -1,0 +1,343 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  color: var(--dark);
+  margin: 0;
+}
+
+.countBadge {
+  background: rgba(27,67,50,0.1);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+}
+
+.selectModeBtn {
+  background: transparent;
+  color: var(--dark);
+  border: 1px solid #ddd;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selectModeBtn.active {
+  background: rgba(27,67,50,0.1);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.uploadBtn {
+  background: var(--secondary);
+  color: var(--dark);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.uploadBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(180,80,20,0.2);
+}
+
+.tabsContainer {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #ddd;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 10px 4px;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab.active {
+  color: var(--dark);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--secondary);
+  border-radius: 3px 3px 0 0;
+}
+
+/* Upload Zone */
+.uploadZonePanel {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+
+.uploadMetadata {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.uploadFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uploadLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.uploadSelect, .uploadInput {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+.uploadSelect:focus, .uploadInput:focus { border-color: var(--primary); }
+
+.uploadSubmitBtn {
+  grid-column: 1 / -1;
+  background: var(--primary);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.uploadSubmitBtn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* Toolbar */
+.toolbar {
+  background: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Photo Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.photoTile {
+  aspect-ratio: 1;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #eee;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.photoTile:hover .overlay,
+.photoTile.selectedMode .overlay {
+  opacity: 1;
+}
+
+.photoTile:hover .image {
+  transform: scale(1.05);
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.iconBtn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+}
+.iconBtn:hover { transform: scale(1.1); }
+.iconBtn.delete:hover { color: var(--error); }
+.iconBtn.star.featured { color: var(--secondary); }
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.bottomRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.caption {
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.categoryPill {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  align-self: flex-start;
+}
+
+.locationText {
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+}
+
+/* Modal Info */
+.modalImage {
+  width: 100%;
+  max-height: 65vh;
+  object-fit: contain;
+  background: #000;
+  border-radius: 8px;
+}
+
+.modalInfo {
+  padding: 20px 0 0;
+}
+
+.modalCaptionInput {
+  width: 100%;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--dark);
+  border: 1px solid transparent;
+  padding: 8px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  outline: none;
+  background: transparent;
+}
+.modalCaptionInput:hover, .modalCaptionInput:focus {
+  border-color: #ddd;
+  background: #f8f9fa;
+}
+
+.modalMetaRow {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.modalMetaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+.modalMetaLabel { color: var(--muted); text-transform: uppercase; font-size: 11px; font-weight: bold; }
+.modalMetaValue { color: var(--dark); font-weight: 500; }
+
+@media (max-width: 1200px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .uploadMetadata { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .header { flex-direction: column; align-items: flex-start; }
+  .headerActions { width: 100%; }
+  .selectModeBtn, .uploadBtn { flex: 1; justify-content: center; }
+}

@@ -1,0 +1,46 @@
+.arrowBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  outline: none;
+  padding: 0;
+}
+
+.prevBtn {
+  left: 24px;
+}
+
+.nextBtn {
+  right: 24px;
+}
+
+@media (max-width: 640px) {
+  .arrowBtn {
+    top: auto;
+    bottom: 120px;
+    transform: none;
+    width: 44px;
+    height: 44px;
+  }
+  
+  .prevBtn {
+    left: 16px;
+  }
+
+  .nextBtn {
+    right: 16px;
+  }
+}

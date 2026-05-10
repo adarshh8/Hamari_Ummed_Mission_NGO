@@ -1,0 +1,231 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background-color: #1A1A1A;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.open {
+  transform: translateX(0);
+}
+
+.logoArea {
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoText {
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--secondary) 0%, rgba(255,255,255,0.1) 100%);
+  margin-bottom: 24px;
+}
+
+.navMenu {
+  flex: 1;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+  border: none;
+  background: transparent;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.active {
+  background: var(--primary) !important;
+  color: white !important;
+}
+
+.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 3px;
+  background-color: var(--secondary);
+  border-radius: 0 4px 4px 0;
+}
+
+.icon {
+  margin-right: 12px;
+}
+
+.badge {
+  margin-left: auto;
+  background: var(--error);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50px;
+}
+
+.bottomArea {
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+}
+
+.adminInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.adminDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.adminName {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.adminRole {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--error);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 0;
+  width: 100%;
+}
+
+.logoutBtn:hover {
+  opacity: 0.8;
+}
+
+.version {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 11px;
+  margin-top: 16px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 90;
+}
+
+@media (min-width: 1025px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+  
+  .closed {
+    width: 80px;
+  }
+
+  .closed .logoText,
+  .closed .badge,
+  .closed .adminDetails,
+  .closed .version,
+  .closed .navText {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+  }
+
+  .closed .icon {
+    margin-right: 0;
+  }
+
+  .closed .navItem {
+    justify-content: center;
+    padding: 12px 0;
+  }
+
+  .closed .logoArea {
+    justify-content: center;
+    padding: 24px 0;
+  }
+
+  .closed .logoutBtn {
+    justify-content: center;
+  }
+
+  .closed .logoutBtn span {
+    display: none;
+  }
+
+  .closed .adminInfo {
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  
+  .closed .avatar {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .open {
+    transform: translateX(0);
+  }
+}

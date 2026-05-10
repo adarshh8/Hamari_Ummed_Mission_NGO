@@ -1,0 +1,30 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #F5F6FA;
+}
+
+.mainContent {
+  flex: 1;
+  margin-left: 260px;
+  margin-top: 64px;
+  padding: 32px;
+  min-height: calc(100vh - 64px);
+  transition: margin-left 0.3s ease;
+}
+
+@media (min-width: 1025px) {
+  .sidebarClosed {
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mainContent {
+    margin-left: 0;
+    padding: 24px 16px;
+  }
+  .sidebarClosed {
+    margin-left: 0;
+  }
+}
