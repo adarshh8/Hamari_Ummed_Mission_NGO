@@ -6,7 +6,6 @@ A complete, production-grade MERN stack application built for the Hamari Ummeed 
 ## Features
 - **Frontend**: Vite + React, Custom CSS (No Tailwind), Zustand, React Router, Framer Motion
 - **Backend**: Node.js, Express, MongoDB Atlas, Mongoose
-- **Payments**: Razorpay Integration for Donations
 - **Authentication**: JWT based Auth with HTTP-only cookies
 - **Emails**: Nodemailer configuration for receipts and alerts
 - **Images**: Multer + Cloudinary setup
@@ -14,7 +13,6 @@ A complete, production-grade MERN stack application built for the Hamari Ummeed 
 ## Prerequisites
 - Node.js (v18+)
 - MongoDB Atlas Account (or local DB)
-- Razorpay Account
 - Cloudinary Account
 - SMTP Credentials (e.g. Gmail App Password)
 
@@ -59,7 +57,7 @@ npm run dev
 ## API Documentation
 
 ## Deployment Link
-**Live Demo:** [https://humari-umeed-mission.vercel.app](https://humari-umeed-mission.vercel.app) *(Replace with your actual deployment link)*
+**Live Demo:** [https://humari-umeed-mission.vercel.app](https://humari-umeed-mission.vercel.app)
 
 | Endpoint | Method | Description | Access |
 |----------|--------|-------------|--------|
