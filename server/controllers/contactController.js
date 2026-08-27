@@ -8,16 +8,12 @@ const sendEmail = require('../utils/sendEmail');
 exports.createMessage = asyncHandler(async (req, res) => {
   const message = await Contact.create(req.body);
 
-  // Send auto-reply to sender
-  try {
-    await sendEmail({
-      email: message.email,
-      subject: 'Message Received - Hamari Ummeed Mission',
-      message: `<h1>Thank you for reaching out!</h1><p>We have received your message and will get back to you shortly.</p>`
-    });
-  } catch (err) {
-    console.error('Email could not be sent', err);
-  }
+  // Send auto-reply to sender asynchronously in the background
+  sendEmail({
+    email: message.email,
+    subject: 'Message Received - Hamari Ummeed Mission',
+    message: `<h1>Thank you for reaching out!</h1><p>We have received your message and will get back to you shortly.</p>`
+  }).catch(err => console.error('Email could not be sent:', err));
 
   res.status(201).json({ success: true, data: message });
 });

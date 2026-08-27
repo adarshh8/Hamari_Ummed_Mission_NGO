@@ -46,18 +46,24 @@ const Volunteer = () => {
 
   const volunteerMutation = useMutation({
     mutationFn: async (data) => {
-      return await api.post('/volunteers', data);
+      const res = await api.post('/volunteers', data);
+      return res.data;
     },
-    onSuccess: (res) => {
+    onSuccess: (data) => {
       setFormSuccess(true);
-      setRefNumber(`HR-${res.data.data._id.substring(0, 8).toUpperCase()}`);
+      const id = data?.data?._id;
+      setRefNumber(id ? `HR-${id.substring(0, 8).toUpperCase()}` : 'HR-CONFIRMED');
       reset();
       setTags([]);
       setAreasOfInterest([]);
-      window.scrollTo({ top: document.getElementById('apply').offsetTop, behavior: 'smooth' });
+      toast.success("Application submitted successfully!");
+      const applySection = document.getElementById('apply');
+      if (applySection) {
+        window.scrollTo({ top: applySection.offsetTop - 80, behavior: 'smooth' });
+      }
     },
     onError: (error) => {
-      toast.error(error.response?.data?.message || "Application failed. Please try again.");
+      toast.error(error.response?.data?.message || error.response?.data?.error || "Application failed. Please try again.");
     }
   });
 

@@ -94,16 +94,12 @@ exports.verifyDonation = asyncHandler(async (req, res) => {
     await campaign.save();
   }
 
-  // Send Email receipt
-  try {
-    await sendEmail({
-      email: donation.donor.email,
-      subject: 'Thank you for your donation - Hamari Ummeed Mission',
-      message: `<h1>Thank You!</h1><p>We received your donation of ₹${donation.amount}. Your receipt number is ${donation.receiptNumber}.</p>`
-    });
-  } catch (err) {
-    console.error('Email could not be sent', err);
-  }
+  // Send Email receipt asynchronously in background
+  sendEmail({
+    email: donation.donor.email,
+    subject: 'Thank you for your donation - Hamari Ummeed Mission',
+    message: `<h1>Thank You!</h1><p>We received your donation of ₹${donation.amount}. Your receipt number is ${donation.receiptNumber}.</p>`
+  }).catch(err => console.error('Email could not be sent:', err));
 
   res.status(200).json({ success: true, data: donation });
 });

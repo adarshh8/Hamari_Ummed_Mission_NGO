@@ -1,10 +1,24 @@
 const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {
-  // Create a transporter
+  // If no credentials or dummy credentials configured, log and return without hanging
+  if (
+    !process.env.EMAIL_USER || 
+    !process.env.EMAIL_PASS || 
+    process.env.EMAIL_PASS === 'your_app_password' ||
+    process.env.EMAIL_USER === 'noreply@humariumeed.org'
+  ) {
+    console.log('Skipping email send: SMTP credentials are not yet configured in .env');
+    return;
+  }
+
+  // Create a transporter with connection timeouts
   const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
+    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+    port: process.env.EMAIL_PORT || 587,
+    connectionTimeout: 5000,
+    greetingTimeout: 5000,
+    socketTimeout: 5000,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
@@ -13,7 +27,7 @@ const sendEmail = async (options) => {
 
   // Define email options
   const message = {
-    from: `${process.env.EMAIL_FROM}`,
+    from: `${process.env.EMAIL_FROM || process.env.EMAIL_USER}`,
     to: options.email,
     subject: options.subject,
     html: options.message

@@ -38,7 +38,8 @@ const Contact = () => {
 
   const contactMutation = useMutation({
     mutationFn: async (data) => {
-      return await api.post('/contact', data);
+      const res = await api.post('/contact', data);
+      return res.data;
     },
     onSuccess: () => {
       setFormSuccess(true);
@@ -46,7 +47,7 @@ const Contact = () => {
       toast.success("Message sent successfully!");
     },
     onError: (error) => {
-      toast.error(error.response?.data?.message || "Failed to send message. Please try again.");
+      toast.error(error.response?.data?.message || error.response?.data?.error || "Failed to send message. Please try again.");
     }
   });
 

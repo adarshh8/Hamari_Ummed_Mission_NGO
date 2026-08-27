@@ -8,16 +8,12 @@ const sendEmail = require('../utils/sendEmail');
 exports.createVolunteer = asyncHandler(async (req, res) => {
   const volunteer = await Volunteer.create(req.body);
 
-  // Send confirmation email
-  try {
-    await sendEmail({
-      email: volunteer.email,
-      subject: 'Volunteer Application Received - Hamari Ummeed Mission',
-      message: `<h1>Thank you for applying!</h1><p>We have received your application and will review it shortly.</p>`
-    });
-  } catch (err) {
-    console.error('Email could not be sent', err);
-  }
+  // Send confirmation email asynchronously in the background
+  sendEmail({
+    email: volunteer.email,
+    subject: 'Volunteer Application Received - Hamari Ummeed Mission',
+    message: `<h1>Thank you for applying!</h1><p>We have received your application and will review it shortly.</p>`
+  }).catch(err => console.error('Email could not be sent:', err));
 
   res.status(201).json({ success: true, data: volunteer });
 });
