@@ -57,3 +57,40 @@ exports.deleteMessage = asyncHandler(async (req, res) => {
 
   res.status(200).json({ success: true, data: {} });
 });
+
+// @desc    Reply to message via email
+// @route   POST /api/v1/contact/:id/reply
+// @access  Private/Admin
+exports.replyMessage = asyncHandler(async (req, res) => {
+  const message = await Contact.findById(req.params.id);
+  
+  if (!message) {
+    res.status(404);
+    throw new Error('Message not found');
+  }
+
+  const { reply } = req.body;
+  if (!reply) {
+    res.status(400);
+    throw new Error('Please provide a reply message');
+  }
+
+  // Send the reply via email
+  try {
+    await sendEmail({
+      email: message.email,
+      subject: `Re: ${message.subject} - Hamari Ummeed Mission`,
+      message: `<p>${reply.replace(/\n/g, '<br>')}</p><br><p>Best Regards,<br>Hamari Ummeed Mission Team</p>`
+    });
+
+    // Update status to replied
+    message.status = 'replied';
+    await message.save();
+
+    res.status(200).json({ success: true, data: message });
+  } catch (err) {
+    console.error('Email could not be sent', err);
+    res.status(500);
+    throw new Error('Email could not be sent. Check your SMTP configuration.');
+  }
+});

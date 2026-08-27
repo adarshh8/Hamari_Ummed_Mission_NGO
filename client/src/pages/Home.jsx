@@ -104,7 +104,7 @@ const Home = () => {
             <div className={styles.sectionLine}></div>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', marginBottom: '24px', color: 'var(--primary)' }}>Deeply Rooted in {lang === 'hi' ? 'उरई' : 'Orai'}</h2>
             <p style={{ fontSize: '1.1rem', color: 'var(--text)', marginBottom: '16px', lineHeight: '1.8' }}>
-              Founded in 2016, Hamari Ummeed Mission was born out of a simple desire: to uplift the underprivileged right here in our city. We focus our energy strictly on <span className="notranslate">{lang === 'hi' ? 'उरई' : 'Orai'}</span>, ensuring our impact is deep and meaningful.
+              Founded in 2020, Hamari Ummeed Mission was born out of a simple desire: to uplift the underprivileged right here in our city. We focus our energy strictly on <span className="notranslate">{lang === 'hi' ? 'उरई' : 'Orai'}</span>, ensuring our impact is deep and meaningful.
             </p>
             <p style={{ fontSize: '1.1rem', color: 'var(--text)', marginBottom: '24px', lineHeight: '1.8' }}>
               We believe that true change starts at home. By educating our children and respecting our elders, we are building a stronger, more compassionate community.

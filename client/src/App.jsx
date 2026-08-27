@@ -18,6 +18,7 @@ const Refunds = lazy(() => import('./pages/Refunds'));
 // Lazy load admin pages
 const AdminLogin = lazy(() => import('./pages/Admin/AdminLogin'));
 const AdminSignup = lazy(() => import('./pages/Admin/AdminSignup'));
+
 const AdminLayout = lazy(() => import('./pages/Admin/AdminLayout'));
 const AdminOverview = lazy(() => import('./pages/Admin/Overview'));
 const AdminEvents = lazy(() => import('./pages/Admin/Events'));
@@ -66,6 +67,7 @@ function App() {
               <AdminSignup />
             </Suspense>
           } />
+
           
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminOverview />} />

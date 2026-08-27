@@ -2,23 +2,31 @@ const User = require('../models/User');
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../utils/generateToken');
 
-// @desc    Register a new admin user
+// @desc    Register the single admin user
 // @route   POST /api/v1/auth/register
-// @access  Public (Should be protected or removed in prod)
+// @access  Restricted — only allowed if no admin exists AND email matches ADMIN_EMAIL env var
 exports.register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  const userExists = await User.findOne({ email });
+  // 1. Only allow the pre-configured admin email
+  const allowedEmail = process.env.ADMIN_EMAIL;
+  if (!allowedEmail || email.toLowerCase() !== allowedEmail.toLowerCase()) {
+    res.status(403);
+    throw new Error('Registration is not allowed.');
+  }
 
-  if (userExists) {
-    res.status(400);
-    throw new Error('User already exists');
+  // 2. Block if an admin already exists (single-admin policy)
+  const adminExists = await User.findOne({});
+  if (adminExists) {
+    res.status(403);
+    throw new Error('An administrator account already exists.');
   }
 
   const user = await User.create({
     name,
     email,
-    password
+    password,
+    role: 'superadmin'
   });
 
   if (user) {

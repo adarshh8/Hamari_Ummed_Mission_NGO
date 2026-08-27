@@ -20,9 +20,15 @@ exports.createDonation = asyncHandler(async (req, res) => {
     }
   }
 
+  // Validate amount — minimum ₹1 (= 100 paise, Razorpay's minimum)
+  if (!amount || isNaN(amount) || Number(amount) < 1) {
+    res.status(400);
+    throw new Error('Minimum donation amount is ₹1');
+  }
+
   const instance = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID || 'dummy',
-    key_secret: process.env.RAZORPAY_KEY_SECRET || 'dummy'
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
   });
 
   const options = {
@@ -62,7 +68,7 @@ exports.verifyDonation = asyncHandler(async (req, res) => {
 
   const text = razorpay_order_id + "|" + razorpay_payment_id;
   const expectedSignature = crypto
-    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET || 'dummy')
+    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
     .update(text.toString())
     .digest("hex");
 

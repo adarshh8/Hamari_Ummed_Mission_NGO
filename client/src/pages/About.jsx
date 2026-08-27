@@ -35,7 +35,7 @@ const About = () => {
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
           <div className={styles.breadcrumb} style={{ display: 'inline-block', marginBottom: '16px' }}><Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>Home</Link> &gt; About Us</div>
           <h1 className={styles.heroTitle} style={{ color: 'var(--white)', fontFamily: 'var(--font-heading)', fontSize: '4rem' }}>Our Story</h1>
-          <p className={styles.heroSub}>Working tirelessly since 2016 for the children and elders of <span className="notranslate">{lang === 'hi' ? 'उरई' : 'Orai'}</span>.</p>
+          <p className={styles.heroSub}>Working tirelessly since 2020 for the children and elders of <span className="notranslate">{lang === 'hi' ? 'उरई' : 'Orai'}</span>.</p>
         </motion.div>
       </div>
     </section>

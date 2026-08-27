@@ -44,7 +44,7 @@ const donationSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['pending', 'received', 'confirmed'],
+    enum: ['pending', 'received', 'confirmed', 'success', 'failed'],
     default: 'pending'
   },
   receiptNumber: {
@@ -53,6 +53,10 @@ const donationSchema = new mongoose.Schema({
   },
   message: {
     type: String
+  },
+  campaign: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Campaign'
   }
 }, {
   timestamps: true

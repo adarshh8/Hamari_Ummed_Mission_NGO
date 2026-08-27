@@ -33,10 +33,10 @@ const StatsBar = () => {
   });
 
   const stats = [
-    { label: t[lang].beneficiaries, value: statsData?.livesImpacted || 0, prefix: '', suffix: '+' },
-    { label: t[lang].projects, value: statsData?.activeProjects || 0, prefix: '', suffix: '' },
-    { label: t[lang].countries, value: statsData?.countries || 1, prefix: '', suffix: '' },
-    { label: t[lang].funds, value: statsData?.fundsRaised || 0, prefix: '₹', suffix: '' }
+    { label: lang === 'hi' ? 'शिक्षित बच्चे' : 'Children Educated', value: 700, prefix: '', suffix: '+' },
+    { label: lang === 'hi' ? 'बुजुर्गों का सहारा' : 'Elders Supported', value: 346, prefix: '', suffix: '+' },
+    { label: lang === 'hi' ? 'सक्रिय स्वयंसेवक' : 'Active Volunteers', value: statsData?.volunteers || 6, prefix: '', suffix: '' },
+    { label: lang === 'hi' ? 'स्थापना से' : 'Established Since', value: 2023, prefix: '', suffix: '' }
   ];
 
   return (

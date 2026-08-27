@@ -39,7 +39,7 @@ const Navbar = () => {
           // Wait, 'en' IS in the dropdown if we use includedLanguages: 'en,hi'.
           selectField.value = 'en';
           selectField.dispatchEvent(new Event('change', { bubbles: true }));
-          
+
           // Also try to click the "Show original" button if it exists
           const iframe = document.querySelector('iframe.goog-te-banner-frame');
           if (iframe) {
@@ -53,9 +53,9 @@ const Navbar = () => {
         }
       }
     };
-    
+
     changeGoogleTranslateLang();
-    
+
     // Poll a few times in case the widget is still loading
     let attempts = 0;
     const intervalId = setInterval(() => {
@@ -73,13 +73,16 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled glass' : ''}`}>
+      {/* Brand pinned to true left corner of navbar */}
+      <Link to="/" className="brand">
+        <img src={NGOLogo} alt="Hamari Ummeed Mission Logo" className="brand-logo" />
+        <span className="brand-text notranslate">
+          {lang === 'hi' ? <>हमारी <span className="text-primary">उम्मीद</span> मिशन</> : <>Hamari <span className="text-primary">Ummeed</span> Mission</>}
+        </span>
+      </Link>
+
       <div className="container flex-between nav-content">
-        <Link to="/" className="brand">
-          <img src={NGOLogo} alt="Hamari Ummeed Mission Logo" className="brand-logo" />
-          <span className="brand-text notranslate">
-            {lang === 'hi' ? <>हमारी <span className="text-primary">उम्मीद</span> मिशन</> : <>Hamari <span className="text-primary">Ummeed</span> Mission</>}
-          </span>
-        </Link>
+        <div style={{ width: '350px' }} className="desktop-only"></div>
 
         <div className="nav-links desktop-only">
           <Link to="/">{t[lang].home}</Link>
@@ -109,19 +112,19 @@ const Navbar = () => {
       <div className="social-icons-corner desktop-only">
         <a href="https://www.instagram.com/hamari_ummeed_mission/" target="_blank" rel="noopener noreferrer" className="social-icon-btn" title="Instagram" aria-label="Instagram">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" strokeWidth="2" fill="none"/>
-            <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" fill="none"/>
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" strokeWidth="2" fill="none" />
+            <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" fill="none" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
           </svg>
         </a>
         <a href="https://www.facebook.com/share/1GoQWUNw49/" target="_blank" rel="noopener noreferrer" className="social-icon-btn" title="Facebook" aria-label="Facebook">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
           </svg>
         </a>
         <a href="https://wa.me/919696294789" target="_blank" rel="noopener noreferrer" className="social-icon-btn" title="WhatsApp" aria-label="WhatsApp">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.95 7.95 0 01-4.054-1.105l-.29-.172-2.868.853.853-2.868-.172-.29A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8zm4.406-5.845c-.242-.121-1.432-.707-1.654-.787-.222-.08-.384-.121-.545.121-.161.242-.626.787-.767.949-.141.161-.282.181-.524.06-.242-.121-1.021-.376-1.944-1.199-.718-.641-1.203-1.432-1.344-1.674-.141-.242-.015-.373.106-.494.109-.109.242-.282.363-.423.121-.141.161-.242.242-.403.08-.162.04-.303-.02-.424-.06-.121-.545-1.314-.747-1.8-.197-.473-.397-.409-.545-.417l-.464-.008c-.161 0-.424.06-.646.303-.222.242-.848.829-.848 2.02 0 1.192.868 2.344.989 2.505.121.161 1.708 2.607 4.139 3.554 1.43.548 1.992.596 2.71.502.435-.06 1.344-.549 1.534-1.08.19-.53.19-.985.133-1.08-.056-.096-.218-.156-.46-.277z"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.95 7.95 0 01-4.054-1.105l-.29-.172-2.868.853.853-2.868-.172-.29A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8zm4.406-5.845c-.242-.121-1.432-.707-1.654-.787-.222-.08-.384-.121-.545.121-.161.242-.626.787-.767.949-.141.161-.282.181-.524.06-.242-.121-1.021-.376-1.944-1.199-.718-.641-1.203-1.432-1.344-1.674-.141-.242-.015-.373.106-.494.109-.109.242-.282.363-.423.121-.141.161-.242.242-.403.08-.162.04-.303-.02-.424-.06-.121-.545-1.314-.747-1.8-.197-.473-.397-.409-.545-.417l-.464-.008c-.161 0-.424.06-.646.303-.222.242-.848.829-.848 2.02 0 1.192.868 2.344.989 2.505.121.161 1.708 2.607 4.139 3.554 1.43.548 1.992.596 2.71.502.435-.06 1.344-.549 1.534-1.08.19-.53.19-.985.133-1.08-.056-.096-.218-.156-.46-.277z" />
           </svg>
         </a>
       </div>
@@ -129,7 +132,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -206,6 +209,10 @@ const Navbar = () => {
           position: relative;
         }
         .brand {
+          position: absolute;
+          left: 20px;
+          top: 50%;
+          transform: translateY(-50%);
           display: flex;
           align-items: center;
           gap: 12px;
@@ -213,6 +220,7 @@ const Navbar = () => {
           font-size: 1.5rem;
           font-weight: 700;
           text-decoration: none;
+          z-index: 10;
         }
         .brand-logo {
           height: 64px;

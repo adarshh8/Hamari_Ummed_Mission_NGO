@@ -185,7 +185,7 @@ const Campaigns = () => {
                     </div>
 
                     <div className={styles.cardFooter}>
-                      <button className={`btn btn-secondary ${styles.donateBtn}`} onClick={() => openDonationModal(camp)}>Donate Now</button>
+                      <button className={`btn btn-secondary ${styles.donateBtn}`} onClick={() => openDonationModal()}>Donate Now</button>
                       <button className={styles.shareBtn} onClick={() => handleCopyLink(camp._id)} title="Share Campaign"><Share2 size={20}/></button>
                     </div>
                   </div>
@@ -326,7 +326,7 @@ const Campaigns = () => {
               </div>
 
               <div style={{ display: 'flex', gap: '16px', marginTop: '24px' }}>
-                <button className="btn btn-secondary btn-lg" onClick={() => openDonationModal(featuredCampaign)}>Donate Now</button>
+                <button className="btn btn-secondary btn-lg" onClick={() => openDonationModal()}>Donate Now</button>
                 <button className="btn btn-outline btn-lg" onClick={() => handleCopyLink(featuredCampaign._id)}>Share</button>
               </div>
             </div>

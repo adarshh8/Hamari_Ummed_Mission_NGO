@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -150,11 +150,7 @@ const AdminLogin = () => {
               </button>
               <style>{`.spin { animation: spin 1s linear infinite; }`}</style>
               
-              <div style={{ textAlign: 'center', marginTop: '24px' }}>
-                <p style={{ color: 'var(--muted)', fontSize: '0.95rem' }}>
-                  Don't have an admin account? <Link to="/admin/signup" style={{ color: 'var(--primary)', fontWeight: 'bold' }}>Create one here</Link>
-                </p>
-              </div>
+
             </form>
           </div>
         </div>

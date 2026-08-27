@@ -13,7 +13,9 @@ const DonationModal = () => {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', pan: '', isAnonymous: false, message: '' });
 
   // The real amount: if a preset was passed (e.g. snack total), use that, else use the manual picker value
-  const amount = donationPresetAmount !== null ? donationPresetAmount : manualAmount;
+  // Guard: only use donationPresetAmount when it's actually a finite positive number
+  const presetIsValid = typeof donationPresetAmount === 'number' && isFinite(donationPresetAmount) && donationPresetAmount > 0;
+  const amount = presetIsValid ? donationPresetAmount : manualAmount;
 
   // Reset state when modal closes
   React.useEffect(() => {
@@ -40,8 +42,8 @@ const DonationModal = () => {
   };
 
   const handleNext = () => {
-    if (step === 1 && amount < 100) {
-      toast.error('Minimum donation amount is ₹100');
+    if (step === 1 && (!amount || amount < 1)) {
+      toast.error('Minimum donation amount is ₹1');
       return;
     }
     if (step === 2 && (!formData.name || !formData.email)) {
@@ -120,18 +122,18 @@ const DonationModal = () => {
           <div className="modal-body">
             {step === 1 && (
               <div className="step-1">
-                {donationPresetAmount !== null && (
+                {presetIsValid && (
                   <div style={{ background: 'rgba(27,67,50,0.06)', borderRadius: '10px', padding: '12px 16px', marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>Your selected total</span>
                     <span style={{ fontWeight: '700', fontSize: '1.4rem', color: 'var(--primary)' }}>₹{donationPresetAmount}</span>
                   </div>
                 )}
-                <h3 style={{ color: 'var(--dark)' }}>{donationPresetAmount !== null ? 'Or choose a different amount' : 'Select Amount'}</h3>
+                <h3 style={{ color: 'var(--dark)' }}>{presetIsValid ? 'Or choose a different amount' : 'Select Amount'}</h3>
                 <div className="amount-grid">
                   {[500, 1000, 2500, 5000].map(val => (
                     <button
                       key={val}
-                      className={`amount-btn ${amount === val && donationPresetAmount === null && !customAmount ? 'active' : ''}`}
+                      className={`amount-btn ${amount === val && !presetIsValid && !customAmount ? 'active' : ''}`}
                       onClick={() => handleAmountSelect(val)}
                     >
                       ₹{val}
@@ -143,9 +145,9 @@ const DonationModal = () => {
                   <input
                     type="number"
                     placeholder="Custom Amount"
-                    value={donationPresetAmount !== null && !customAmount ? donationPresetAmount : customAmount}
+                    value={presetIsValid && !customAmount ? donationPresetAmount : customAmount}
                     onChange={handleCustomAmount}
-                    min="100"
+                    min="1"
                   />
                 </div>
                 <button className="btn btn-primary w-full mt-4" onClick={handleNext}>Continue — ₹{amount}</button>
