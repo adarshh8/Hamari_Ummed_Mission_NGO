@@ -69,7 +69,7 @@ const Events = () => {
       return res.data.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminEvents']);
+      queryClient.invalidateQueries({ queryKey: ['adminEvents'] });
       toast.success('Event created successfully');
       handleCloseModal();
     },
@@ -82,7 +82,7 @@ const Events = () => {
       return res.data.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminEvents']);
+      queryClient.invalidateQueries({ queryKey: ['adminEvents'] });
       toast.success('Event updated successfully');
       handleCloseModal();
     },
@@ -94,7 +94,7 @@ const Events = () => {
       await api.delete(`/events/${id}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminEvents']);
+      queryClient.invalidateQueries({ queryKey: ['adminEvents'] });
       toast.success('Event deleted successfully');
       setDeleteId(null);
     },
@@ -431,3 +431,4 @@ const Events = () => {
 };
 
 export default Events;
+

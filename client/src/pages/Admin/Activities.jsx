@@ -51,7 +51,7 @@ const Activities = () => {
       return res.data.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminActivities']);
+      queryClient.invalidateQueries({ queryKey: ['adminActivities'] });
       toast.success('Activity created successfully!');
       closeModal();
     },
@@ -66,7 +66,7 @@ const Activities = () => {
       return res.data.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminActivities']);
+      queryClient.invalidateQueries({ queryKey: ['adminActivities'] });
       toast.success('Activity updated successfully');
       closeModal();
     },
@@ -80,7 +80,7 @@ const Activities = () => {
       await api.delete(`/activities/${id}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminActivities']);
+      queryClient.invalidateQueries({ queryKey: ['adminActivities'] });
       toast.success('Activity deleted');
       setDeleteId(null);
     },
@@ -93,11 +93,11 @@ const Activities = () => {
       return res.data.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminActivities']);
+      queryClient.invalidateQueries({ queryKey: ['adminActivities'] });
     },
     onError: () => {
       toast.error('Failed to update visibility');
-      queryClient.invalidateQueries(['adminActivities']);
+      queryClient.invalidateQueries({ queryKey: ['adminActivities'] });
     }
   });
 
@@ -409,3 +409,4 @@ const Activities = () => {
 };
 
 export default Activities;
+

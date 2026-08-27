@@ -86,7 +86,7 @@ const Messages = () => {
     },
     onSuccess: () => {
       toast.success('Message deleted');
-      queryClient.invalidateQueries(['adminMessages']);
+      queryClient.invalidateQueries({ queryKey: ['adminMessages'] });
       if (selectedMsgId === deleteId) setSelectedMsgId(null);
       setDeleteId(null);
     }
@@ -307,3 +307,4 @@ const Messages = () => {
 };
 
 export default Messages;
+

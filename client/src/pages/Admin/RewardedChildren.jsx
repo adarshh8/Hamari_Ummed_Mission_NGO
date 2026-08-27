@@ -76,7 +76,7 @@ const RewardedChildren = () => {
       return res.data.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminRewardedChildren']);
+      queryClient.invalidateQueries({ queryKey: ['adminRewardedChildren'] });
       toast.success('Child added successfully');
       handleCloseModal();
     },
@@ -89,7 +89,7 @@ const RewardedChildren = () => {
       return res.data.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminRewardedChildren']);
+      queryClient.invalidateQueries({ queryKey: ['adminRewardedChildren'] });
       toast.success('Updated successfully');
       handleCloseModal();
     },
@@ -101,7 +101,7 @@ const RewardedChildren = () => {
       await api.delete(`/rewarded-children/${id}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminRewardedChildren']);
+      queryClient.invalidateQueries({ queryKey: ['adminRewardedChildren'] });
       toast.success('Deleted successfully');
       setDeleteId(null);
       setSelectedIds(prev => prev.filter(selectedId => selectedId !== deleteId));
@@ -115,7 +115,7 @@ const RewardedChildren = () => {
       return res.data.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminRewardedChildren']);
+      queryClient.invalidateQueries({ queryKey: ['adminRewardedChildren'] });
     },
     onError: () => toast.error('Failed to update visibility')
   });
@@ -126,7 +126,7 @@ const RewardedChildren = () => {
       await Promise.all(ids.map(id => api.delete(`/rewarded-children/${id}`)));
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminRewardedChildren']);
+      queryClient.invalidateQueries({ queryKey: ['adminRewardedChildren'] });
       toast.success('Selected items deleted');
       setSelectedIds([]);
       setBulkDeleteConfirm(false);
@@ -430,3 +430,4 @@ const RewardedChildren = () => {
 };
 
 export default RewardedChildren;
+

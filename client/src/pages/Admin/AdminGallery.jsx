@@ -64,7 +64,7 @@ const AdminGallery = () => {
       return res.data.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminGallery']);
+      queryClient.invalidateQueries({ queryKey: ['adminGallery'] });
     },
     onError: () => toast.error('Failed to update')
   });
@@ -74,7 +74,7 @@ const AdminGallery = () => {
       await api.put(`/gallery/${id}`, { caption });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminGallery']);
+      queryClient.invalidateQueries({ queryKey: ['adminGallery'] });
       toast.success('Caption updated');
     }
   });
@@ -97,7 +97,7 @@ const AdminGallery = () => {
       await Promise.all(uploadPromises);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminGallery']);
+      queryClient.invalidateQueries({ queryKey: ['adminGallery'] });
       toast.success('Photos uploaded successfully');
       setIsUploadOpen(false);
       setUploadFiles([]);
@@ -110,7 +110,7 @@ const AdminGallery = () => {
       await api.delete(`/gallery/${id}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminGallery']);
+      queryClient.invalidateQueries({ queryKey: ['adminGallery'] });
       toast.success('Photo deleted');
       setDeleteId(null);
       if (viewPhoto) setViewPhoto(null);
@@ -124,7 +124,7 @@ const AdminGallery = () => {
       await Promise.all(ids.map(id => api.delete(`/gallery/${id}`)));
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['adminGallery']);
+      queryClient.invalidateQueries({ queryKey: ['adminGallery'] });
       toast.success('Selected photos deleted');
       setSelectedIds([]);
       setBulkDeleteConfirm(false);
@@ -422,3 +422,4 @@ const AdminGallery = () => {
 };
 
 export default AdminGallery;
+
