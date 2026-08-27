@@ -26,7 +26,25 @@ exports.createMessage = asyncHandler(async (req, res) => {
 // @route   GET /api/v1/contact
 // @access  Private/Admin
 exports.getMessages = asyncHandler(async (req, res) => {
-  const messages = await Contact.find().sort('-createdAt');
+  const queryObj = {};
+  if (req.query.status && req.query.status.toLowerCase() !== 'all') {
+    queryObj.status = req.query.status.toLowerCase();
+  }
+  if (req.query.search) {
+    queryObj.$or = [
+      { name: { $regex: req.query.search, $options: 'i' } },
+      { email: { $regex: req.query.search, $options: 'i' } },
+      { subject: { $regex: req.query.search, $options: 'i' } },
+      { message: { $regex: req.query.search, $options: 'i' } }
+    ];
+  }
+
+  let query = Contact.find(queryObj).sort('-createdAt');
+  if (req.query.limit) {
+    query = query.limit(parseInt(req.query.limit, 10));
+  }
+
+  const messages = await query;
   res.status(200).json({ success: true, count: messages.length, data: messages });
 });
 

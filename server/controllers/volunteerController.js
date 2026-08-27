@@ -26,7 +26,27 @@ exports.createVolunteer = asyncHandler(async (req, res) => {
 // @route   GET /api/v1/volunteers
 // @access  Private/Admin
 exports.getVolunteers = asyncHandler(async (req, res) => {
-  const volunteers = await Volunteer.find();
+  const queryObj = {};
+  if (req.query.status && req.query.status.toLowerCase() !== 'all') {
+    queryObj.status = req.query.status.toLowerCase();
+  }
+  if (req.query.interest && req.query.interest.toLowerCase() !== 'all') {
+    queryObj.areaOfInterest = req.query.interest;
+  }
+  if (req.query.search) {
+    queryObj.$or = [
+      { name: { $regex: req.query.search, $options: 'i' } },
+      { email: { $regex: req.query.search, $options: 'i' } },
+      { phone: { $regex: req.query.search, $options: 'i' } }
+    ];
+  }
+
+  let query = Volunteer.find(queryObj).sort('-createdAt');
+  if (req.query.limit) {
+    query = query.limit(parseInt(req.query.limit, 10));
+  }
+
+  const volunteers = await query;
   res.status(200).json({ success: true, count: volunteers.length, data: volunteers });
 });
 

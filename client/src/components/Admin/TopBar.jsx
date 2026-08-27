@@ -25,20 +25,30 @@ const TopBar = ({ toggleSidebar, isSidebarOpen }) => {
   const { data: newMessages = [] } = useQuery({
     queryKey: ['notifMessages'],
     queryFn: async () => {
-      const res = await api.get('/contact?status=new&limit=5');
-      return res.data.data || [];
+      try {
+        const res = await api.get('/contact?status=new&limit=5');
+        const list = res.data.data || [];
+        return list.filter(m => m.status === 'new');
+      } catch (e) {
+        return [];
+      }
     },
-    refetchInterval: 60000, // refetch every 60s
+    refetchInterval: 30000, // refetch every 30s
   });
 
   // Fetch pending volunteers
   const { data: pendingVolunteers = [] } = useQuery({
     queryKey: ['notifVolunteers'],
     queryFn: async () => {
-      const res = await api.get('/volunteers?status=pending&limit=5');
-      return res.data.data || [];
+      try {
+        const res = await api.get('/volunteers?status=pending&limit=5');
+        const list = res.data.data || [];
+        return list.filter(v => v.status === 'pending');
+      } catch (e) {
+        return [];
+      }
     },
-    refetchInterval: 60000,
+    refetchInterval: 30000,
   });
 
   const totalCount = newMessages.length + pendingVolunteers.length;
